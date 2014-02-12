@@ -1,0 +1,31 @@
+<h1>CLIENT</h1>
+<%= link_to 'search', home_search_path %>
+
+<%= form_tag("/", method: "get") do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% if @response %>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Desc</th>
+        <th>Year</th>
+        <th>Poster</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @response.each do |movie| %>
+        <tr>
+          <td><%= movie['title'] %></td>
+          <td><%= movie['desc'] %></td>
+          <td><%= movie['year'] %></td>
+          <td><%= image_tag movie['art']['url'], size: "135x200" %>
+        </tr>
+      <% end %> 
+     </tbody>
+  </table>
+<% end %>
